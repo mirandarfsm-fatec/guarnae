@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro Militar</title>
+</h:head>
+
+<h:body>
+	<h:form id="formMilitar">
+		<p:messages id="msg" showIcon="false" autoUpdate="true" />
+		<h:commandButton value="Novo Militar"
+			action="#{cadastroMilitarBean.novo}" />
+		<p:fieldset styleClass="fieldSet"
+			legend="#{cadastroMilitarBean.militares.size()} Militares Cadastrados"
+			id="fieldMilitares">
+
+			<p:dataTable id="militarTable" var="militar"
+				value="#{cadastroMilitarBean.militares}" rowKey="#{militar}"
+				emptyMessage="Nenhum militar cadastrado">
+				<p:column headerText="Nome" sortBy="#{militar.nome}"
+					filterBy="#{militar.nome}" id="nome">
+					#{militar.nome}
+				</p:column>
+				<p:column headerText="Quantidade Escala Preta"
+					sortBy="#{militar.quantidadePreta()}"
+					filterBy="#{militar.quantidadePreta()}" id="quantidadePreta">
+					#{militar.quantidadePreta()}
+				</p:column>
+				<p:column headerText="Quantidade Escala Vermelha"
+					sortBy="#{militar.quantidadeVermelha()}"
+					filterBy="#{militar.quantidadeVermelha()}" id="quantidadeVermelha">
+					#{militar.quantidadeVermelha()}
+				</p:column>
+
+				<p:column headerText="Alterar">
+					<p:commandButton value="Alterar" action="#{cadastroMilitarBean.editar}"
+						title="Alterar" id="botaoAlterar">
+						<f:setPropertyActionListener value="#{militar}"
+							target="#{cadastroMilitarBean.militar}" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Excluir">
+					<p:commandButton title="Excluir" value="Excluir" id="botaoExcluir"
+						actionListener="#{cadastroMilitarBean.excluir}"
+						update=":formMilitar:fieldMilitares :formMilitar:msg">
+						<f:setPropertyActionListener value="#{militar}"
+							target="#{cadastroMilitarBean.militar}" />
+						<p:confirm header="Deletar Militar"
+							message="Você realmente deseja deletar este militar?" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
+	</h:form>
+</h:body>
+</html>

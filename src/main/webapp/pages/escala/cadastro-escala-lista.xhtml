@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro Militar</title>
+</h:head>
+
+<h:body>
+	<h:form id="formEscala">
+		<p:messages id="msg" showIcon="false" autoUpdate="true" />
+		<h:commandButton value="Nova Escala"
+			action="#{cadastroEscalaBean.novo}" />
+		<p:fieldset styleClass="fieldSet"
+			legend="#{cadastroEscalaBean.escalas.size()} Escalas Cadastradas"
+			id="fieldEscalas">
+
+			<p:dataTable id="escalaTable" var="escala"
+				value="#{cadastroEscalaBean.escalas}" rowKey="#{escala}"
+				emptyMessage="Nenhuma escala cadastrada">
+				<p:column headerText="Nome" sortBy="#{escala.nome}"
+					filterBy="#{escala.nome}" id="nome">
+					#{escala.nome}
+				</p:column>
+				<p:column headerText="Quantidade Militar na Escala"
+					sortBy="#{escala.quantidadeMilitar()}"
+					filterBy="#{escala.quantidadeMilitar()}" id="quantidadeMilitar">
+					#{escala.quantidadeMilitar()}
+				</p:column>
+				
+				<p:column headerText="Alterar">
+					<p:commandButton value="Alterar" action="#{cadastroEscalaBean.editar}"
+						title="Alterar" id="botaoAlterar">
+						<f:setPropertyActionListener value="#{escala}"
+							target="#{cadastroEscalaBean.escala}" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Excluir">
+					<p:commandButton title="Excluir" value="Excluir" id="botaoExcluir"
+						actionListener="#{cadastroEscalaBean.excluir}"
+						update=":formEscala:fieldEscalas :formEscala:msg">
+						<f:setPropertyActionListener value="#{escala}"
+							target="#{cadastroEscalaBean.escala}" />
+						<p:confirm header="Deletar Escala"
+							message="Você realmente deseja deletar esta escala?" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
+	</h:form>
+</h:body>
+</html>

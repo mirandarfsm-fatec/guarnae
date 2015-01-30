@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Página de Cadastro</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h:messages/>
+		
+		<h:panelGrid columns="2">
+			<h:outputText value="Nome: " />
+			<h:inputText value="#{militarBean.militar.nome}" />
+			<h:outputText value="Preta: " />
+			<ui:repeat var="preta" value="#{militarBean.militar.pretas}">
+				<p:calendar id="popup" value="#{preta}" />
+				<h:commandLink action="#{militarBean.removePreta(preta)}" value="Remover"/>
+				<br/>
+			</ui:repeat>
+			<h:commandLink action="#{militarBean.adicionaPreta}" value="Adicionar"/>
+			<br/>
+			<h:outputText value="Vermelha: " />
+			<ui:repeat var="vermelha" value="#{militarBean.militar.vermelhas}">
+				<p:calendar id="popup" value="#{vermelha}" />
+				<h:commandLink action="#{militarBean.removeVermelha(vermelha)}" value="Remover"/>
+				<br/>
+			</ui:repeat>
+			<h:commandLink action="#{militarBean.adicionaVermelha}" value="Adicionar"/>
+			<br/>
+			<h:outputText value="Quantidade no Efetivo: " />
+			<h:inputText value="#{militarBean.quantidade}" />
+		</h:panelGrid>
+		<h:commandButton value="Verificar" action="#{militarBean.cadastrar}" />
+	</h:form>
+
+</h:body>
+</html>
