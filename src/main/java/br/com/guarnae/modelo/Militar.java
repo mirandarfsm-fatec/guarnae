@@ -3,20 +3,43 @@ package br.com.guarnae.modelo;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "militar")
 public class Militar implements Comparable<Militar> {
 
+	private Long id;
 	private String nome;
 	private List<Date> pretas;
 	private List<Date> vermelhas;
 
+	@Id
+	@Column(name="id",unique=true,nullable=false)
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	@Column(name="nome",unique=true,nullable=false)
 	public String getNome() {
 		return nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	@ElementCollection(targetClass=Date.class,fetch=FetchType.LAZY)
 	public List<Date> getPretas() {
 		return pretas;
 	}
@@ -25,6 +48,7 @@ public class Militar implements Comparable<Militar> {
 		this.pretas = pretas;
 	}
 
+	@ElementCollection(targetClass=Date.class)
 	public List<Date> getVermelhas() {
 		return vermelhas;
 	}

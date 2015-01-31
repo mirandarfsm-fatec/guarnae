@@ -1,13 +1,12 @@
 package br.com.guarnae.servico;
 
-import java.util.Date;
 import java.util.List;
 
 import br.com.guarnae.modelo.Militar;
 
 public interface MilitarServico {
 
-	Militar getMilitar(Militar militar);
+	Militar getById(final Long id);
 
 	List<Militar> findAll();
 
@@ -16,10 +15,8 @@ public interface MilitarServico {
 	void update(Militar militar);
 
 	void remove(Militar militar);
-	
-	void addPreta(Militar militar, Date data);
-	
-	void addVermelha(Militar militar, Date data);
+
+	void removeById(final Long id);
 
 	double escalaPretaPorMilitar(int quantidade);
 

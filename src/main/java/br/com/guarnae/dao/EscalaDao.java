@@ -3,11 +3,10 @@ package br.com.guarnae.dao;
 import java.util.List;
 
 import br.com.guarnae.modelo.Escala;
-import br.com.guarnae.modelo.Militar;
 
 public interface EscalaDao {
 
-	Escala getEscala(Escala escala);
+	Escala getById(final Long id);
 
 	List<Escala> findAll();
 
@@ -17,7 +16,6 @@ public interface EscalaDao {
 
 	void remove(Escala escala);
 
-	void addMilitar(Escala escala, Militar militar);
+	void removeById(final Long id);
 
-	void removeMilitar(Escala escala, Militar militar);
 }

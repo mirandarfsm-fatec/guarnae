@@ -18,9 +18,9 @@ public class EscalaServicoImpl implements EscalaServico {
 
 	@Autowired
 	EscalaDao dao;
-
-	public Escala getEscala(Escala escala) {
-		return dao.getEscala(escala);
+	
+	public Escala getById(Long id) {
+		return dao.getById(id);
 	}
 
 	public List<Escala> findAll() {
@@ -39,12 +39,8 @@ public class EscalaServicoImpl implements EscalaServico {
 		dao.remove(escala);
 	}
 
-	public void addMilitar(Escala escala, Militar militar) {
-		dao.addMilitar(escala, militar);
-	}
-
-	public void removeMilitar(Escala escala, Militar militar) {
-		dao.removeMilitar(escala, militar);
+	public void removeById(Long id) {
+		dao.removeById(id);
 	}
 
 	public void escalarPreta(List<Date> pretas, Escala escala) {

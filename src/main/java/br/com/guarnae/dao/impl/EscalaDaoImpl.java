@@ -1,51 +1,47 @@
 package br.com.guarnae.dao.impl;
 
-import java.util.LinkedList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
 import br.com.guarnae.dao.EscalaDao;
 import br.com.guarnae.modelo.Escala;
-import br.com.guarnae.modelo.Militar;
 
 @Repository
 public class EscalaDaoImpl implements EscalaDao {
 
-	private List<Escala> escalas = new LinkedList<Escala>();
-	
-	public Escala getEscala(Escala escala) {
-		for (Escala e : this.escalas) {
-			if(e.getNome().equals(escala.getNome()));
-				return e;
-		}
-		return null;
-	}
+	@PersistenceContext
+	private EntityManager entityManager;
 
+	public Escala getById(Long id) {
+		return entityManager.find(Escala.class, id);
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Escala> findAll() {
-		return this.escalas;
+		return entityManager.createQuery("FROM " + Escala.class.getName())
+				.getResultList();
 	}
 
 	public void save(Escala escala) {
-		this.escalas.add(escala);
+		entityManager.persist(escala);
 	}
 
 	public void update(Escala escala) {
-		Escala e = getEscala(escala);
-		e.setMilitares(escala.getMilitares());
+		entityManager.merge(escala);
 	}
 
 	public void remove(Escala escala) {
-		this.escalas.remove(escala);
+		escala = getById(escala.getId());
+		entityManager.remove(escala);
 	}
-	
-	public void addMilitar(Escala escala, Militar militar){
-		Escala e = getEscala(escala);
-		e.getMilitares().add(militar);
+
+	public void removeById(Long id) {
+		Escala escala = getById(id);
+		entityManager.remove(escala);
 	}
-	
-	public void removeMilitar(Escala escala, Militar militar){
-		Escala e = getEscala(escala);
-		e.getMilitares().remove(militar);
-	}
+
 }

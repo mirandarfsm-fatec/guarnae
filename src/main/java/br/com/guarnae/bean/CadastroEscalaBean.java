@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.guarnae.modelo.Escala;
@@ -13,6 +14,7 @@ import br.com.guarnae.modelo.Militar;
 import br.com.guarnae.servico.EscalaServico;
 
 @Controller
+@Scope("session")
 public class CadastroEscalaBean {
 
 	private Escala escala;
@@ -40,7 +42,7 @@ public class CadastroEscalaBean {
 	}
 
 	public String editar() {
-		escala = servico.getEscala(escala);
+		escala = servico.getById(escala.getId());
 		return "/pages/cadastrar-escala-formulario.xhtml";
 	}
 

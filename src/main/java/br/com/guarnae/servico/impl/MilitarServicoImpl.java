@@ -1,6 +1,5 @@
 package br.com.guarnae.servico.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,8 @@ public class MilitarServicoImpl implements MilitarServico {
 	@Autowired
 	private MilitarDao dao;
 
-	public Militar getMilitar(Militar militar) {
-		return dao.getMilitar(militar);
+	public Militar getById(final Long id) {
+		return dao.getById(id);
 	}
 
 	public List<Militar> findAll() {
@@ -38,12 +37,8 @@ public class MilitarServicoImpl implements MilitarServico {
 		dao.remove(militar);
 	}
 
-	public void addPreta(Militar militar, Date data) {
-		dao.addPreta(militar, data);
-	}
-
-	public void addVermelha(Militar militar, Date data) {
-		dao.addVermelha(militar, data);
+	public void removeById(final Long id) {
+		dao.removeById(id);
 	}
 
 	public double escalaPretaPorMilitar(int quantidade) {

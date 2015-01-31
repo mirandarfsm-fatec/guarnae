@@ -7,12 +7,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.guarnae.modelo.Militar;
 import br.com.guarnae.servico.MilitarServico;
 
 @Controller
+@Scope("session")
 public class CadastroMilitarBean {
 
 	private Militar militar;
@@ -41,7 +43,7 @@ public class CadastroMilitarBean {
 	}
 
 	public String editar() {
-		militar = servico.getMilitar(militar);
+		militar = servico.getById(militar.getId());
 		return "/pages/militar/cadastrar-militar-formulario.xhtml";
 	}
 

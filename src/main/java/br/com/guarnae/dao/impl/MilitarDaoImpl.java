@@ -1,8 +1,9 @@
 package br.com.guarnae.dao.impl;
 
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,43 +13,35 @@ import br.com.guarnae.modelo.Militar;
 @Repository
 public class MilitarDaoImpl implements MilitarDao {
 
-	private List<Militar> militares = new LinkedList<Militar>();
+	@PersistenceContext
+	private EntityManager entityManager;
 
-	public Militar getMilitar(Militar militar) {
-		for (Militar m : this.militares) {
-			if (m.getNome().equals(militar.getNome()))
-				;
-			return m;
-		}
-		return null;
+	public Militar getById(final Long id) {
+		return entityManager.find(Militar.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Militar> findAll() {
-		return this.militares;
+		return entityManager.createQuery("FROM " + Militar.class.getName())
+				.getResultList();
 	}
 
 	public void save(Militar militar) {
-		this.militares.add(militar);
+		entityManager.persist(militar);
 	}
 
 	public void update(Militar militar) {
-		Militar m = getMilitar(militar);
-		m.setPretas(militar.getPretas());
-		m.setPretas(militar.getVermelhas());
+		entityManager.merge(militar);
 	}
 
 	public void remove(Militar militar) {
-		this.militares.remove(militar);
+		militar = getById(militar.getId());
+		entityManager.remove(militar);
 	}
 
-	public void addPreta(Militar militar, Date data) {
-		Militar m = getMilitar(militar);
-		m.getPretas().add(data);
-	}
-
-	public void addVermelha(Militar militar, Date data) {
-		Militar m = getMilitar(militar);
-		m.getPretas().add(data);
+	public void removeById(final Long id) {
+		Militar militar = getById(id);
+		entityManager.remove(militar);
 	}
 
 }
