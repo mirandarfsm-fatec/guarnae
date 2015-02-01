@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.primefaces.model.DualListModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -22,28 +21,27 @@ public class CadastroEscalaBean {
 	private Escala escala;
 	private List<Escala> escalas;
 	private List<Militar> militares;
-	private DualListModel<Militar> militaresDual;
 
 	@Autowired
 	private EscalaServico escalaServico;
 
 	@Autowired
 	private MilitarServico militarServico;
-
+	
 	@PostConstruct
 	private void init() {
 		escalas = escalaServico.findAll();
-		militares = militarServico.findAll();
-		// LayoutIndexManager.atualizarIndice(1);
 	}
 
 	public String novo() {
 		escala = new Escala();
+		escala.setMilitares(new ArrayList<Militar>());
+		militares = militarServico.findAll();
 		return "/pages/escala/cadastro-escala-formulario.xhtml";
 	}
 
 	public String salvar() {
-		escala.setMilitares(new ArrayList<Militar>());
+		//System.out.println(escala.getMilitares().get(0).getNome().toString());
 		escalaServico.save(escala);
 		escalas = escalaServico.findAll();
 		return "/pages/escala/cadastrar-escala-lista.xhtml";
@@ -87,13 +85,4 @@ public class CadastroEscalaBean {
 		this.militares = militares;
 	}
 
-	public DualListModel<Militar> getMilitaresDual() {
-		return militaresDual;
-	}
-
-	public void setMilitaresDual(DualListModel<Militar> militaresDual) {
-		this.militaresDual = militaresDual;
-	}
-
-	
 }

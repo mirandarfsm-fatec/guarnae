@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.guarnae.dao.EscalaDao;
 import br.com.guarnae.modelo.Escala;
@@ -14,6 +15,7 @@ import br.com.guarnae.modelo.Militar;
 import br.com.guarnae.servico.EscalaServico;
 
 @Service
+@Transactional
 public class EscalaServicoImpl implements EscalaServico {
 
 	@Autowired

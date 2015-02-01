@@ -41,7 +41,7 @@ public class Militar implements Comparable<Militar> {
 		this.nome = nome;
 	}
 	
-	@ElementCollection(targetClass=Date.class,fetch=FetchType.LAZY)
+	@ElementCollection(targetClass=Date.class,fetch=FetchType.EAGER)
 	public List<Date> getPretas() {
 		return pretas;
 	}
@@ -50,7 +50,7 @@ public class Militar implements Comparable<Militar> {
 		this.pretas = pretas;
 	}
 
-	@ElementCollection(targetClass=Date.class)
+	@ElementCollection(targetClass=Date.class,fetch=FetchType.EAGER)
 	public List<Date> getVermelhas() {
 		return vermelhas;
 	}
