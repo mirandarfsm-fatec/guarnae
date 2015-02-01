@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.primefaces.model.DualListModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import br.com.guarnae.modelo.Escala;
 import br.com.guarnae.modelo.Militar;
 import br.com.guarnae.servico.EscalaServico;
+import br.com.guarnae.servico.MilitarServico;
 
 @Controller
 @Scope("session")
@@ -19,40 +21,46 @@ public class CadastroEscalaBean {
 
 	private Escala escala;
 	private List<Escala> escalas;
+	private List<Militar> militares;
+	private DualListModel<Militar> militaresDual;
 
 	@Autowired
-	private EscalaServico servico;
+	private EscalaServico escalaServico;
+
+	@Autowired
+	private MilitarServico militarServico;
 
 	@PostConstruct
 	private void init() {
-		escalas = servico.findAll();
+		escalas = escalaServico.findAll();
+		militares = militarServico.findAll();
 		// LayoutIndexManager.atualizarIndice(1);
 	}
 
 	public String novo() {
 		escala = new Escala();
-		return "/pages/cadastro-escala-formulario.xhtml";
+		return "/pages/escala/cadastro-escala-formulario.xhtml";
 	}
 
 	public String salvar() {
 		escala.setMilitares(new ArrayList<Militar>());
-		servico.save(escala);
-		escalas = servico.findAll();
-		return "/pages/cadastrar-escala-lista.xhtml";
+		escalaServico.save(escala);
+		escalas = escalaServico.findAll();
+		return "/pages/escala/cadastrar-escala-lista.xhtml";
 	}
 
 	public String editar() {
-		escala = servico.getById(escala.getId());
-		return "/pages/cadastrar-escala-formulario.xhtml";
+		escala = escalaServico.getById(escala.getId());
+		return "/pages/escala/cadastrar-escala-formulario.xhtml";
 	}
 
 	public String cancelar() {
-		return "/pages/cadastrar-escala-lista.xhtml";
+		return "/pages/escala/cadastrar-escala-lista.xhtml";
 	}
 
 	public void excluir() {
-		servico.remove(escala);
-		escalas = servico.findAll();
+		escalaServico.remove(escala);
+		escalas = escalaServico.findAll();
 	}
 
 	public Escala getEscala() {
@@ -71,4 +79,21 @@ public class CadastroEscalaBean {
 		this.escalas = escalas;
 	}
 
+	public List<Militar> getMilitares() {
+		return militares;
+	}
+
+	public void setMilitares(List<Militar> militares) {
+		this.militares = militares;
+	}
+
+	public DualListModel<Militar> getMilitaresDual() {
+		return militaresDual;
+	}
+
+	public void setMilitaresDual(DualListModel<Militar> militaresDual) {
+		this.militaresDual = militaresDual;
+	}
+
+	
 }

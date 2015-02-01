@@ -1,10 +1,13 @@
+
 package br.com.guarnae.modelo;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +21,7 @@ public class Escala {
 	private List<Militar> militares;
 
 	@Id
+	@GeneratedValue
 	@Column(name="id",unique=true,nullable=false)
 	public Long getId() {
 		return id;
@@ -36,7 +40,7 @@ public class Escala {
 		this.nome = nome;
 	}
 	
-	@OneToMany(targetEntity=Militar.class,fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=Militar.class,fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	public List<Militar> getMilitares() {
 		return militares;
 	}
