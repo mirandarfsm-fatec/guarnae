@@ -22,8 +22,9 @@
 				<p:message for="nomeEscala" />
 				<h:outputText value="Militares: " />
 				<p:selectCheckboxMenu id="menu"
-					value="#{cadastroEscalaBean.escala.militares}" label="militares" filter="true"
-					filterMatchMode="startsWith" panelStyle="width:250px">
+					value="#{cadastroEscalaBean.escala.militares}" label="" filter="true"
+					filterMatchMode="startsWith" converter="jsonConverter">
+<!-- 					<f:attribute name="collectionType" value="java.util.ArrayList" /> -->
 					<f:selectItems value="#{cadastroEscalaBean.militares}" var="militar" itemLabel="#{militar.nome}" itemValue="#{militar}" />
 				</p:selectCheckboxMenu>
 			</h:panelGrid>

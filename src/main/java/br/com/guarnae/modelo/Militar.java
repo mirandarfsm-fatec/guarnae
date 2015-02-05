@@ -22,7 +22,7 @@ public class Militar implements Comparable<Militar> {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id",unique=true,nullable=false)
+	@Column(name="id",nullable=false)
 	public Long getId() {
 		return id;
 	}

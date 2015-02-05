@@ -1,6 +1,5 @@
 package br.com.guarnae.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -35,7 +34,6 @@ public class CadastroEscalaBean {
 
 	public String novo() {
 		escala = new Escala();
-		escala.setMilitares(new ArrayList<Militar>());
 		militares = militarServico.findAll();
 		return "/pages/escala/cadastro-escala-formulario.xhtml";
 	}
