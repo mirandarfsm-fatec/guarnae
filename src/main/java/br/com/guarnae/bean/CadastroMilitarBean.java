@@ -1,7 +1,5 @@
 package br.com.guarnae.bean;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -35,8 +33,6 @@ public class CadastroMilitarBean {
 	}
 
 	public String salvar() {
-		militar.setPretas(new ArrayList<Date>());
-		militar.setVermelhas(new ArrayList<Date>());
 		servico.save(militar);
 		militares = servico.findAll();
 		return "/pages/militar/cadastrar-militar-lista.xhtml";

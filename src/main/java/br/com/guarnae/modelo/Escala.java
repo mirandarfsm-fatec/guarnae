@@ -42,8 +42,10 @@ public class Escala {
 		this.nome = nome;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "escala_militar", joinColumns = @JoinColumn(name = "militar_id"), inverseJoinColumns = @JoinColumn(name = "escala_id"))
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "escala_militar", 
+	joinColumns = @JoinColumn(name = "militar_id"), 
+	inverseJoinColumns = @JoinColumn(name = "escala_id"))
 	public List<Militar> getMilitares() {
 		return militares;
 	}

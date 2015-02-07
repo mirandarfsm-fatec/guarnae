@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Escala Militar</title>
+</h:head>
+
+<h:body>
+	<h:form id="formEscalaMilitar">
+		<p:messages id="msg" globalOnly="true" showIcon="false"
+			autoUpdate="true" />
+		<p:fieldset legend="Dados Cadastrais">
+			<h:panelGrid columns="3">
+				<h:outputText value="Escala: " />
+				<p:selectOneMenu id="menu"
+					value="#{escalaMilitarBean.escala}" label="" filter="true"
+					filterMatchMode="startsWith" converter="jsonConverter">
+<!-- 					<f:attribute name="collectionType" value="java.util.ArrayList" /> -->
+					<f:selectItems value="#{escalaMilitarBean.escalas}" var="escala" itemLabel="#{escala.nome}" itemValue="#{escala}" />
+				</p:selectOneMenu>
+            	<br/>
+            	<h:outputText value="Datas: " />
+            	<ui:repeat var="preta" value="#{escalaMilitarBean.datas}">
+					<p:calendar id="popup" value="#{data}" />
+					<h:commandLink action="#{escalaMilitarBean.removeData(data)}" value="Remover"/>
+					<br/>
+				</ui:repeat>
+				<h:commandLink action="#{escalaMilitarBean.adicionaData}" value="Adicionar"/>
+				<br/>
+			</h:panelGrid>
+		</p:fieldset>
+		<p:commandButton id="botaoCancelar" value="Cancelar" immediate="true"
+			action="#{escalaMilitarBean.cancelar}" />
+		<p:commandButton id="botaoSalvar" value="Salvar"
+			action="#{escalaMilitarBean.cadastrar}" update="@form" />
+
+	</h:form>
+
+</h:body>
+</html>

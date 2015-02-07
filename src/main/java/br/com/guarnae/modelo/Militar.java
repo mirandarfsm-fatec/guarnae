@@ -1,5 +1,6 @@
 package br.com.guarnae.modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class Militar implements Comparable<Militar> {
 
 	private Long id;
 	private String nome;
-	private List<Date> pretas;
-	private List<Date> vermelhas;
+	private List<Date> pretas = new ArrayList<Date>();
+	private List<Date> vermelhas = new ArrayList<Date>();
 
 	@Id
 	@GeneratedValue

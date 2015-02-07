@@ -25,8 +25,6 @@ public class MilitarBean {
 	@PostConstruct
 	private void init() {
 		militar = new Militar();
-		militar.setPretas(new ArrayList<Date>());
-		militar.setVermelhas(new ArrayList<Date>());
 	}
 
 	public String cadastrar() {

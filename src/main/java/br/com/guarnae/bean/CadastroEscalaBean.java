@@ -26,7 +26,7 @@ public class CadastroEscalaBean {
 
 	@Autowired
 	private MilitarServico militarServico;
-	
+
 	@PostConstruct
 	private void init() {
 		escalas = escalaServico.findAll();
@@ -39,7 +39,6 @@ public class CadastroEscalaBean {
 	}
 
 	public String salvar() {
-		//System.out.println(escala.getMilitares().get(0).getNome().toString());
 		escalaServico.save(escala);
 		escalas = escalaServico.findAll();
 		return "/pages/escala/cadastrar-escala-lista.xhtml";
