@@ -12,15 +12,13 @@
 
 <h:body>
 	<h:form id="formEscalaMilitar">
-		<p:messages id="msg" globalOnly="true" showIcon="false"
-			autoUpdate="true" />
+		<p:messages id="msg"  showDetail="true"/>
 		<p:fieldset legend="Dados Cadastrais">
 			<h:panelGrid columns="3">
 				<h:outputText value="Escala: " />
 				<p:selectOneMenu id="menu"
-					value="#{escalaMilitarBean.escala}" label="" filter="true"
+					value="#{escalaMilitarBean.escala}" filter="true"
 					filterMatchMode="startsWith" converter="jsonConverter">
-<!-- 					<f:attribute name="collectionType" value="java.util.ArrayList" /> -->
 					<f:selectItems value="#{escalaMilitarBean.escalas}" var="escala" itemLabel="#{escala.nome}" itemValue="#{escala}" />
 				</p:selectOneMenu>
             	<br/>
