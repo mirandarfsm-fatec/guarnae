@@ -35,6 +35,7 @@ public class EscalaMilitarBean {
 	}
 	
 	public String cadastrar() {
+		escala = escalaServico.getById(escala.getId());
 		escalaServico.escalarPreta(datas, escala);
 		for (Militar m: escala.getMilitares()) {
 			message("Militar: " + m.getNome() + "Data: " + m.getPretas());
@@ -50,7 +51,7 @@ public class EscalaMilitarBean {
 		datas.add(new Date());
 	}
 	
-	public void adicionaData(Object data) {
+	public void removeData(Object data) {
 		datas.remove((Date)data);
 	}
 	

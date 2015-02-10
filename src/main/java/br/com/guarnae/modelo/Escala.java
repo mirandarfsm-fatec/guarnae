@@ -84,11 +84,6 @@ public class Escala {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (militares == null) {
-			if (other.militares != null)
-				return false;
-		} else if (!militares.equals(other.militares))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;

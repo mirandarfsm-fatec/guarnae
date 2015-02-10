@@ -23,9 +23,9 @@
 				</p:selectOneMenu>
             	<br/>
             	<h:outputText value="Datas: " />
-            	<ui:repeat var="preta" value="#{escalaMilitarBean.datas}">
-					<p:calendar id="popup" value="#{data}" />
-					<h:commandLink action="#{escalaMilitarBean.removeData(data)}" value="Remover"/>
+            	<ui:repeat varStatus="i" value="#{escalaMilitarBean.datas}">
+					<p:calendar id="popup" value="#{escalaMilitarBean.datas[i.index]}" />
+					<h:commandLink action="#{escalaMilitarBean.removeData(escalaMilitarBean.datas[i.index])}" value="Remover"/>
 					<br/>
 				</ui:repeat>
 				<h:commandLink action="#{escalaMilitarBean.adicionaData}" value="Adicionar"/>
