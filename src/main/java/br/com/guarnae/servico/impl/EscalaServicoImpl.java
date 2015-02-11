@@ -59,6 +59,8 @@ public class EscalaServicoImpl implements EscalaServico {
 		for (Date p : pretas) {
 			escala.getMilitares().get(i).getPretas().add(p);
 			i++;
+			if(i >= escala.getMilitares().size())
+				i=0;
 		}
 	}
 
@@ -77,6 +79,8 @@ public class EscalaServicoImpl implements EscalaServico {
 		for (Date v : vermelhas) {
 			escala.getMilitares().get(i).getPretas().add(v);
 			i++;
+			if(i >= escala.getMilitares().size())
+				i=0;
 		}
 	}
 
